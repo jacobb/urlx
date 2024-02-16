@@ -84,8 +84,8 @@ impl App {
         let selected = self.state.selected().unwrap_or(0);
         let url = &self.items[selected];
 
-        Command::new("open").arg(url).spawn()?;
-
+        let mut child = Command::new("open").arg(url).spawn()?;
+        child.wait()?; // Wait for the child process to exit.
         Ok(())
     }
 
@@ -93,10 +93,7 @@ impl App {
         let selected = self.state.selected().unwrap_or(0);
         let url = &self.items[selected];
 
-        let mut child = Command::new("pbcopy")
-            .stdin(Stdio::piped())
-            .spawn()
-            .expect("Failed to start child process");
+        let mut child = Command::new("pbcopy").stdin(Stdio::piped()).spawn()?;
 
         if let Some(ref mut stdin) = child.stdin.take() {
             writeln!(stdin, "{}", url).expect("Failed to write to child stdin");
