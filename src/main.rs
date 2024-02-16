@@ -25,7 +25,7 @@ fn list() {
         eprintln!("Error reading from stdin");
     }
 
-    for url in find_urls(&input) {
+    for url in find_urls(&input, &true) {
         println!("{}", url);
     }
 }
@@ -35,7 +35,7 @@ fn cho() {
     if io::stdin().read_to_string(&mut input).is_err() {
         eprintln!("Error reading from stdin");
     }
-    let urls = find_urls(&input);
+    let urls = find_urls(&input, &true);
     let _ = choose(urls);
 }
 
