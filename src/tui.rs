@@ -66,7 +66,7 @@ impl App {
             .map(|i| ListItem::new(i.as_str()))
             .collect();
         let list = List::new(list_items)
-            .block(Block::default().title("List").borders(Borders::ALL))
+            .block(Block::default().title("URLs").borders(Borders::ALL))
             .fg(TEXT_COLOR)
             .bg(NORMAL_ROW_COLOR)
             .highlight_style(
