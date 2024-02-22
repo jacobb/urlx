@@ -108,7 +108,7 @@ impl App {
     }
 }
 
-pub fn choose(urls: Vec<String>) -> Result<()> {
+pub fn choose_from_urls(urls: Vec<String>) -> Result<()> {
     let app = App::new(urls);
     let mut terminal = setup_terminal().context("setup failed")?;
     app.run(&mut terminal).context("app loop failed")?;
